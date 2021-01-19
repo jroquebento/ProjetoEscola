@@ -1,0 +1,141 @@
+﻿@model Escola.Models.GerarBoletimViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Gerar Boletim</h2>
+
+@using (Html.BeginForm())
+{
+    
+        <div class="form-inline" style="margin-bottom: 30px">
+            <div class="form-group margem">
+                <label>Aluno</label>
+                @Html.DropDownListFor(
+        modelItem => Model.Aluno_Id,
+        new SelectList(Model.ListaAlunos, "Id", "Pessoa.Nome"),
+        "Selecione ...",
+        new { @class = "form-control", @style = "width:auto" })
+                @Html.ValidationMessageFor(modelItem => Model.Aluno_Id, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group margem">
+                <label>Disciplina</label>
+                @Html.DropDownListFor(
+   modelItem => Model.ProfessorDisciplina_Id,
+   new SelectList(Model.ListaProfessorDisciplinas, "Item1", "Item2"),
+   "Selecione ...",
+   new { @class = "form-control", @style = "width:auto" })
+
+                @Html.ValidationMessageFor(modelItem => Model.ProfessorDisciplina_Id, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group margem">
+                <label>Bimestre</label>
+                @Html.DropDownListFor(
+   modelItem => Model.Bimestre_Id,
+   new SelectList(Model.ListaBimestres, "Id", "Nome"),
+   "Selecione ...",
+   new { @class = "form-control", @style = "width:auto" })
+                @Html.ValidationMessageFor(modelItem => Model.Bimestre_Id, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group margem">
+                <label>Ano</label>
+                @Html.DropDownListFor(
+modelItem => Model.Ano,
+new SelectList(Model.ListaAnos, "Item1", "Item2"),
+"Selecione ...",
+new { @class = "form-control", @style = "width:auto" })
+                @Html.ValidationMessageFor(modelItem => Model.Ano, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group margem">
+                <input type="submit" value="Buscar" class="form-control btn btn-info" style="width: auto;" />
+            </div>
+        </div>
+    
+    if (Model.ListaNotas != null)
+    {
+        if (Model.ListaNotas.Count() >= 1)
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Aluno
+                    </th>
+                    <th>
+                        ProfessorDisciplina
+                    </th>
+                    <th>
+                        Bimestre
+                    </th>
+                    <th>
+                        Valor
+                    </th>
+                    <th>
+                        Ano
+                    </th>
+                    <th>
+                        DataCadastro
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.ListaNotas)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Aluno.Id)
+                            @Html.HiddenFor(modelItem => item.Aluno.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Aluno.Pessoa.Nome)
+                            @Html.HiddenFor(modelItem => item.Aluno.Pessoa.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProfessorDisciplina.Professor.Pessoa.Nome) -
+                            @Html.DisplayFor(modelItem => item.ProfessorDisciplina.Disciplina.Nome)
+                            @Html.HiddenFor(modelItem => item.ProfessorDisciplina.Professor.Pessoa.Nome) -
+                            @Html.HiddenFor(modelItem => item.ProfessorDisciplina.Disciplina.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Bimestre.Nome)
+                            @Html.HiddenFor(modelItem => item.Bimestre.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Valor)
+                            @Html.HiddenFor(modelItem => item.Valor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ano)
+                            @Html.HiddenFor(modelItem => item.Ano)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataCadastro)
+                            @Html.HiddenFor(modelItem => item.DataCadastro)
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    }
+}
+
+
+@if (Model.ListaNotas != null)
+{
+    if (Model.ListaNotas.Count() > 1)
+    {
+        @Html.Partial("_GravarBoletim", Model.ListaNotas);
+    }
+}
+
+<div>
+    @Html.ActionLink("Voltar para a lista", "Index")
+</div>
+

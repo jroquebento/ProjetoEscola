@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Escola.Models.Pessoa>
+
+@{
+    ViewBag.Title = "Pessoa";
+}
+
+<h2>Pessoa</h2>
+
+<p>
+    @Html.ActionLink("Novo", "Create") |
+    @Html.ActionLink("Buscar", "Buscar")
+</p>
+
+<table class="table">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Nome
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                RG
+            </th>
+            <th>
+                CPF
+            </th>
+            <th>
+                DataNascimento
+            </th>
+            <th>
+                Sexo
+            </th>
+            <th>
+                Telefone
+            </th>
+            <th></th>
+        </tr>
+
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modeItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RG)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CPF)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sexo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) 
+                </td>
+            </tr>
+        }
+
+</table>

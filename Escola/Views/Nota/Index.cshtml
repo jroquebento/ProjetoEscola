@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Escola.Models.Nota>
+
+@{
+    ViewBag.Title = "Nota";
+}
+
+<h2>Nota</h2>
+
+<p>
+    @Html.ActionLink("Novo", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Nome
+        </th>
+        <th>
+            ProfessorDisciplina
+        </th>
+        <th>
+            Bimestre
+        </th>
+        <th>
+            Valor
+        </th>
+        <th>
+            DataCadastro
+        </th>
+        <th>
+            Ano
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aluno.Pessoa.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfessorDisciplina.Professor.Pessoa.Nome) -
+                @Html.DisplayFor(modelItem => item.ProfessorDisciplina.Disciplina.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bimestre.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCadastro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ano)
+            </td>
+ 
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id })    
+            </td>
+        </tr>
+    }
+
+</table>
+
+

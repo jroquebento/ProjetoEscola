@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Escola.Models.Pessoa>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Listar", "Pessoa", FormMethod.Post))
+{
+    if (Model.Count() > 1)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    RG
+                </th>
+                <th>
+                    CPF
+                </th>
+                <th>
+                    Data de Nascimento
+                </th>
+                <th>
+                    Sexo
+                </th>
+                <th>
+                    Telefone
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modeItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RG)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CPF)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataNascimento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sexo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefone)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+}
